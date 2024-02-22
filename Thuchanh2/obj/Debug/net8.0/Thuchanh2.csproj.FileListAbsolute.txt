@@ -134,3 +134,4 @@ D:\New folder (2)\Thuchanh2\Thuchanh2\obj\Debug\net8.0\refint\Thuchanh2.dll
 D:\New folder (2)\Thuchanh2\Thuchanh2\obj\Debug\net8.0\Thuchanh2.pdb
 D:\New folder (2)\Thuchanh2\Thuchanh2\obj\Debug\net8.0\Thuchanh2.genruntimeconfig.cache
 D:\New folder (2)\Thuchanh2\Thuchanh2\obj\Debug\net8.0\ref\Thuchanh2.dll
+D:\New folder (2)\Thuchanh2\Thuchanh2\obj\Debug\net8.0\Thuchanh2.sourcelink.json

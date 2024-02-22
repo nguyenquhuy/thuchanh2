@@ -24,8 +24,8 @@ else if (!string.IsNullOrWhiteSpace(errorMessage))
 
 <form asp-action="Search" asp-controller="Orders" method="get" class="mb-3">
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search by CustomerId" name="customerId" />
-        <button type="submit" class="btn btn-primary">Search</button>
+        <input type="text" class="form-control" placeholder="Search by OrderId" name="orderId" />
+        <button type="submit" class="btn btn-primary" id="search">Search</button>
     </div>
 </form>
 
