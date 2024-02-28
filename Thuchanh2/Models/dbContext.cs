@@ -2,9 +2,9 @@
 
 namespace Thuchanh2.Models
 {
-    public class OrderDbContext : DbContext
+    public class dbContext : DbContext
     {
-        public OrderDbContext(DbContextOptions options) : base(options)
+        public dbContext(DbContextOptions options) : base(options)
         {
         }
         public DbSet<Orders> Orders { get; set; }

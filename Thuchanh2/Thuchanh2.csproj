@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\ProductOrders\" />
+    <Folder Include="Views\Products\" />
+  </ItemGroup>
+
 </Project>

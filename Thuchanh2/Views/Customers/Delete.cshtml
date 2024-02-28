@@ -1,0 +1,36 @@
+﻿@model Thuchanh2.Models.Customer
+
+@{
+    ViewData["Title"] = "Delete Customer";
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+<form action="Delete" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">FirstName</label>
+        <input type="text" class="form-control" asp-for="FirstName" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">LastName</label>
+        <input type="text" class="form-control" asp-for="LastName" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input type="text" class="form-control" asp-for="Phone" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" asp-for="Email" readonly />
+    <div class="mb-3">
+        <label class="form-label">Mobile</label>
+        <input type="text" class="form-control" asp-for="Mobile" readonly />
+    </div>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger" onclick="return function('Are you sure to delete this order')">Delete</button>
+    </div>
+</form>

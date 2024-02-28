@@ -6,9 +6,9 @@ namespace Thuchanh2.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly OrderDbContext _context;
+        private readonly dbContext _context;
 
-        public OrdersController(OrderDbContext context)
+        public OrdersController(dbContext context)
         {
             this._context = context;
         }
@@ -38,48 +38,30 @@ namespace Thuchanh2.Controllers
 
         //Search
         [HttpGet]
-        public IActionResult Search(int? customerId)
+        public IActionResult Search(int? orderId)
         {
-            try
+            var orders = _context.Orders.Include(o => o.Customer).ToList();
+            List<OrderViewModel> orderList = new List<OrderViewModel>();
+
+            if (orderId.HasValue)
             {
-                var orders = GetOrdersByCustomerId(customerId);
+                orders = orders.Where(o => o.Id == orderId.Value).ToList();
+            }
 
-                List<OrderViewModel> orderList = new List<OrderViewModel>();
-
-                foreach (var order in orders)
+            foreach (var order in orders)
+            {
+                var orderViewModel = new OrderViewModel()
                 {
-                    var orderViewModel = new OrderViewModel()
-                    {
-                        Id = order.Id,
-                        OrderDate = order.OrderDate,
-                        FirstName = order.Customer.FirstName,
-                        LastName = order.Customer.LastName,
-                    };
-                    orderList.Add(orderViewModel);
-                }
+                    Id = order.Id,
+                    OrderDate = order.OrderDate,
+                    FirstName = order.Customer.FirstName,
+                    LastName = order.Customer.LastName,
+                };
+                orderList.Add(orderViewModel);
+            }
 
-                return View("Index", orderList);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return RedirectToAction("Index");
-            }
+            return View("Index", orderList);
         }
-
-        private List<Orders> GetOrdersByCustomerId(int? customerId)
-        {
-            var query = _context.Orders.Include(o => o.Customer).AsQueryable();
-
-            if (customerId.HasValue)
-            {
-                query = query.Where(o => o.CustomerId == customerId.Value);
-            }
-
-            return query.ToList();
-        }
-
-
 
         //Create
         [HttpGet]

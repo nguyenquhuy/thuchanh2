@@ -11,9 +11,9 @@ using Thuchanh2.Models;
 
 namespace Thuchanh2.Migrations
 {
-    [DbContext(typeof(OrderDbContext))]
-    [Migration("20240124153612_initial")]
-    partial class initial
+    [DbContext(typeof(dbContext))]
+    [Migration("20240221211324_add-migration initial")]
+    partial class addmigrationinitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,18 +43,19 @@ namespace Thuchanh2.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Mobile")
-                        .HasColumnType("int");
+                    b.Property<string>("Mobile")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Thuchanh2.Models.Order", b =>
+            modelBuilder.Entity("Thuchanh2.Models.Orders", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +122,7 @@ namespace Thuchanh2.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Thuchanh2.Models.Order", b =>
+            modelBuilder.Entity("Thuchanh2.Models.Orders", b =>
                 {
                     b.HasOne("Thuchanh2.Models.Customer", "Customer")
                         .WithMany()
@@ -134,7 +135,7 @@ namespace Thuchanh2.Migrations
 
             modelBuilder.Entity("Thuchanh2.Models.ProductOrders", b =>
                 {
-                    b.HasOne("Thuchanh2.Models.Order", "Order")
+                    b.HasOne("Thuchanh2.Models.Orders", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)

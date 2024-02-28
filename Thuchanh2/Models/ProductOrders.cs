@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Thuchanh2.Models
@@ -8,15 +7,16 @@ namespace Thuchanh2.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        public int Quantity { get; set; }
-        [Required]
 
+        [Required(ErrorMessage = "Quantity is required")]
+        public int Quantity { get; set; }
+
+        [Required(ErrorMessage = "Product Id is required")]
         [ForeignKey("Product")]
         [Display(Name = "Product")]
         public int ProductId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Order Id is required")]
         [ForeignKey("Order")]
         [Display(Name = "Order")]
         public int OrderId { get; set; }

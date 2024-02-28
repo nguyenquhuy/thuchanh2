@@ -1,0 +1,77 @@
+﻿@model List<Thuchanh2.Models.CustomerViewModel>
+@{
+    ViewData["Title"] = "Customer Details";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success! </strong>@successMessage
+    </div>
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error! </strong>@errorMessage
+    </div>
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+}
+
+<form asp-action="Search" asp-controller="Customers" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search by CustomerId" name="customerId" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<form>
+    <button asp-action="Create" asp-controller="Customers" class="btn btn-primary mb-3">Create Customer</button>
+    <table class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr class="table-active">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.Id</td>
+                        <td>@customer.FullName</td>
+                        <td>@customer.Email</td>
+                        <td>@customer.Mobile</td>
+                        <td>@customer.Phone</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a asp-controller="Customers" asp-action="Edit" asp-route-id="@customer.Id" class="btn btn-primary">Edit</a>
+                                <a asp-controller="Customers" asp-action="Delete" asp-route-id="@customer.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div>
+                            No Order available at this moment!
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
